@@ -1,3 +1,3 @@
 from modules import mShows
 
-print mShows.jGetShows('file', 'df')
+print mShows.jGetShows('url', 'df')
