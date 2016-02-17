@@ -1,6 +1,8 @@
-from jConfig import cShowsDataSource
-from lxml import etree, html
 import requests, jHelpers
+from jConfig import cShowsDataSource, cShowsUpdateDataDestination
+from lxml import etree, html
+from bs4 import BeautifulSoup as bs
+
 
 
 def jGetShows(method,output):
@@ -28,3 +30,12 @@ def jGetShows(method,output):
 
     elif output == 'df':
         return jHelpers.jDictToDF(shows_dict)
+
+def jUpdateShowsDatabase(cShowsURL):
+    res = str(bs(requests.get(cShowsURL).text,'html.parser'))
+    if (res):
+        jHelpers.jWriteToFile(res, cShowsUpdateDataDestination)
+        return 'Successfully updated shows database'
+    else:
+        return 'Error-Shows-01'
+

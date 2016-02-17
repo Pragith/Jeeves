@@ -1,7 +1,9 @@
 cCurrencyDataSource = 'data/currency.json'
+cCurrencyUpdateDataDestination = 'data/currency_latest.json'
 cCurrencyURL = 'http://api.fixer.io/latest?base=INR'
 
-cShowsDataSource = '../data/shows.xml'
+cShowsDataSource = 'data/shows.xml'
+cShowsUpdateDataDestination = 'data/shows.xml'
 cShowsURL = "http://showrss.info/rss.php?user_id=207042&hd=0&proper=null&raw=false"
 
 cTemperature = 'C' #"C" or "F"

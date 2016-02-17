@@ -1,13 +1,10 @@
 import requests, jHelpers
-from jConfig import cCurrencyDataSource
+from jConfig import cCurrencyDataSource, cCurrencyUpdateDataDestination
 from pandas import read_json, DataFrame
 from bs4 import BeautifulSoup as bs
 
 
-
-## Update currency database
-##  API URL - http://api.fixer.io/latest?base=INR
-
+##  Update the currency table if required and load the latest data
 currency_table = read_json(cCurrencyDataSource)
 currency_table['price'] = (1/currency_table['rates']).round(2)
 currency_table['currency'] = currency_table.index.values
@@ -17,7 +14,7 @@ currency_table = currency_table.drop(['date','base'],1)
 def jUpdateCurrencyDatabase(cCurrencyURL):
     res = str(bs(requests.get(cCurrencyURL).text,'html.parser'))
     if (res):
-        jHelpers.jWriteToFile(res, '../data/currency_latest.json')
+        jHelpers.jWriteToFile(res, cCurrencyUpdateDataDestination)
         return 'Successfully updated currency database'
     else:
         return 'Error-Currency-01'
